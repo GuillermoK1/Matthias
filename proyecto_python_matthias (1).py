@@ -10,7 +10,7 @@ Original file is located at
 import pandas as pd
 import os
 
-df = pd.read_csv('/content/drive/MyDrive/export.csv', sep=";", nrows=15000)
+df = pd.read_csv('/content/drive/MyDrive/export.csv', sep=";")
 
 def convertir_numero(numero):
     numero = numero.replace(',', '.')
@@ -51,6 +51,13 @@ df['Katalogpreis / empf. VK - VK Brutto Preis ./. Rabatt'] =\
  df['Katalogpreis / empf. VK - VK Brutto Preis ./. Rabatt'].astype(float).apply(lambda x: f"{x:.2f}".replace(".", ""))
 df['Katalogpreis / empf. VK - VK Brutto Preis ./. Rabatt'] =\
  df['Katalogpreis / empf. VK - VK Brutto Preis ./. Rabatt'].apply(lambda x: f"{x[:2]}.{x[2:]}")
+
+
+# splitting max 15000 rows
+# cuando ya tienes 15000 rows (export_1.csv)
+# otro export nuevo (export_2.csv)
+# hasta todos rows
+
 
 """#Listo ✅
 
