@@ -10,7 +10,7 @@ Original file is located at
 import pandas as pd
 import os
 
-df = pd.read_csv('/content/drive/MyDrive/export.csv', sep=";")
+df = pd.read_csv('https://github.com/GuillermoK1/Matthias/blob/main/import/export.csv', sep=";")
 
 def convertir_numero(numero):
     numero = numero.replace(',', '.')
@@ -42,16 +42,21 @@ df['Preisdatum EK / Konditionsdatum'] = date.today()
 
 df = df.astype(str).apply(lambda x: x.str.rjust(20))
 
+"""#Listo ✅
 
+"""
 
 # splitting max 15000 rows
 # cuando ya tienes 15000 rows (export_1.csv)
 # otro export nuevo (export_2.csv)
 # hasta todos rows
+def dividir_y_exportar_dataframe(df, ruta_carpeta, num_filas=15000):
+    num_archivos = len(df) // num_filas + 1
+    for i in range(num_archivos):
+        carpeta = os.path.join(ruta_carpeta, f'export_{i+1}')
+        os.makedirs(carpeta, exist_ok=True)
+        archivo_export = os.path.join(carpeta, 'archivo.csv')
+        df[i*num_filas:(i+1)*num_filas].to_csv(archivo_export, index=False)
 
-
-"""#Listo ✅
-
-"""
-
-df.to_csv('/content/drive/MyDrive/export_tercera_revision.csv', index= False)
+#Modificar nombre de ruta_carpeta aquí abajo.
+dividir_y_exportar_dataframe(df, 'https://github.com/GuillermoK1/Matthias/blob/main/import/export.csv')
