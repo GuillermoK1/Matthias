@@ -42,15 +42,6 @@ df['Preisdatum EK / Konditionsdatum'] = date.today()
 
 df = df.astype(str).apply(lambda x: x.str.rjust(20))
 
-df['Netto-Einkaufspreis (indiv., falls vorh.)'] =\
- df['Netto-Einkaufspreis (indiv., falls vorh.)'].astype(float).apply(lambda x: f"{x:.2f}".replace(".", ""))
-df['Netto-Einkaufspreis (indiv., falls vorh.)'] =\
- df['Netto-Einkaufspreis (indiv., falls vorh.)'].apply(lambda x: f"{x[:2]}.{x[2:]}")
-
-df['Katalogpreis / empf. VK - VK Brutto Preis ./. Rabatt'] =\
- df['Katalogpreis / empf. VK - VK Brutto Preis ./. Rabatt'].astype(float).apply(lambda x: f"{x:.2f}".replace(".", ""))
-df['Katalogpreis / empf. VK - VK Brutto Preis ./. Rabatt'] =\
- df['Katalogpreis / empf. VK - VK Brutto Preis ./. Rabatt'].apply(lambda x: f"{x[:2]}.{x[2:]}")
 
 
 # splitting max 15000 rows
