@@ -7,7 +7,7 @@ archivos_csv = [archivo for archivo in archivos if archivo.endswith('.csv')]
 
 for archivo_csv in archivos_csv:
     ruta_archivo = os.path.join(ruta_import, archivo_csv)
-    df = pd.read_csv(ruta_archivo)
+df = pd.read_csv(ruta_archivo)    
 
 def convertir_numero(numero):
     numero = numero.replace(',', '.')
