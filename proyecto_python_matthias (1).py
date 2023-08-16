@@ -1,6 +1,12 @@
 import pandas as pd
 import os
 
+ruta_import = os.getcwd()
+archivos = os.listdir(ruta_import)
+archivos_csv = [archivo for archivo in archivos if archivo.endswith('.csv')]
+
+for archivo_csv in archivos_csv:
+    ruta_archivo = os.path.join(ruta_import, archivo_csv)
 
 def convertir_numero(numero):
     numero = numero.replace(',', '.')
