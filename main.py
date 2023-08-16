@@ -1,7 +1,9 @@
 import os
-import shutil
+#import shutil
 from archivo_py import funciones
-
+'''
+Mirar carpeta_import y carpeta_export.
+'''
 files = []
 archivo_import = os.getcwd() + '/import'
 archivo_export = os.getcwd() + '/export'
@@ -23,6 +25,7 @@ for file in files:
     result = funciones(os.path.join(archivo_import, file))
     
     # Dividir el resultado en partes de 15000 filas
+    '''
     result_parts = [result[i:i+15000] for i in range(0, len(result), 15000)]
     
     # Exportar cada parte a un archivo separado
