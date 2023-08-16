@@ -4,10 +4,7 @@ import os
 #EN ESTE PUNTO HAY QUE COLOCAR LA RUTA DE LA CARPETA origen EN LA QUE EL CLIENTE INTRODUCE EL ARCHIVO ORIGINAL SIN CORREGIR.
 df = pd.read_csv('https://github.com/GuillermoK1/Matthias/blob/main/import/export.csv', sep=";")
 #################'||||||||||||||||||||||||||AQUÍ ARRIBA||||||||||||||||||||||||||||||'
-#ESTA ES LA FUNCIÓN PARA CORREGIR EL FORMATO DE LOS NÚMEROS (1234,56)
-'''
-FALTA EL DETALLE DEL REDONDEO!!!
-'''
+#ESTA ES LA FUNCIÓN PARA REDONDEAR Y CORREGIR EL FORMATO DE LOS NÚMEROS (1234,56)
 def convertir_numero(numero):
     numero = numero.replace(',', '.')
     numero = str(round(float(numero), 2))
