@@ -10,7 +10,7 @@ FALTA EL DETALLE DEL REDONDEO!!!
 '''
 def convertir_numero(numero):
     numero = numero.replace(',', '.')
-
+    numero = str(round(float(numero), 2))
     partes = numero.split('.')
 
     if len(partes) == 2:
