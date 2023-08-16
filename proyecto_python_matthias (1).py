@@ -1,4 +1,3 @@
-
 import pandas as pd
 import os
 
@@ -17,6 +16,7 @@ def convertir_numero(numero):
         numero += '.00'
 
     return numero
+
 df['Netto-Einkaufspreis (indiv., falls vorh.)'] =\
  df['Netto-Einkaufspreis (indiv., falls vorh.)'].apply(convertir_numero)
 
@@ -29,7 +29,8 @@ df['Gebindemenge / BMEcat Verpackungsmenge'] =\
 from datetime import date
 df['Preisdatum EK / Konditionsdatum'] = date.today()
 
-def dividir_y_exportar_dataframe(df, ruta_carpeta, num_filas= 5000):
+def dividir_y_exportar_dataframe(df, num_filas=5000):
+    ruta_carpeta = os.getcwd()
     num_archivos = len(df) // num_filas + 1
     carpeta = os.path.join(ruta_carpeta, 'export')
     os.makedirs(carpeta, exist_ok=True)
