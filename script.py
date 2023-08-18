@@ -18,8 +18,8 @@ def convertir_numero(numero):
     return numero
 
 files = []
-carpeta_import = os.getcwd() + '/drive/MyDrive/Matthias/import'
-carpeta_export = os.getcwd() + '/drive/MyDrive/Matthias/export'
+carpeta_import = os.getcwd() + '/import'
+carpeta_export = os.getcwd() + '/export'
 
 if not os.path.exists(carpeta_export):
     os.makedirs(carpeta_export)
