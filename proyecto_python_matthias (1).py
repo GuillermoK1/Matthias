@@ -1,14 +1,7 @@
-import pandas as pd
 import os
-
-ruta_import = os.getcwd()
-archivos = os.listdir(ruta_import)
-archivos_csv = [archivo for archivo in archivos if archivo.endswith('.csv')]
-
-for archivo_csv in archivos_csv:
-    ruta_archivo = os.path.join(ruta_import, archivo_csv)
-df = pd.read_csv(ruta_archivo)    
-
+import pandas as pd
+from datetime import date
+MaxRows = 5000
 def convertir_numero(numero):
     numero = numero.replace(',', '.')
     numero = str(round(float(numero), 2))
@@ -24,23 +17,48 @@ def convertir_numero(numero):
 
     return numero
 
-df['Netto-Einkaufspreis (indiv., falls vorh.)'] =\
- df['Netto-Einkaufspreis (indiv., falls vorh.)'].apply(convertir_numero)
+files = []
+carpeta_import = os.getcwd() + '/drive/MyDrive/Matthias/import'
+carpeta_export = os.getcwd() + '/drive/MyDrive/Matthias/export'
 
-df['Katalogpreis / empf. VK - VK Brutto Preis ./. Rabatt'] =\
- df['Katalogpreis / empf. VK - VK Brutto Preis ./. Rabatt'].apply(convertir_numero)
+if not os.path.exists(carpeta_export):
+    os.makedirs(carpeta_export)
 
-df['Gebindemenge / BMEcat Verpackungsmenge'] =\
- df['Gebindemenge / BMEcat Verpackungsmenge'].astype(str).str.split(',').str[0]
+for file in os.listdir(carpeta_import):
+    if file.endswith('.csv'):
+        files.append(file)
 
-from datetime import date
-df['Preisdatum EK / Konditionsdatum'] = date.today()
+if len(files) == 0:
+    print('No hay archivos CSV en la carpeta de importación.')
 
-def dividir_y_exportar_dataframe(df, num_filas=5000):
-    ruta_carpeta = os.getcwd()
-    num_archivos = len(df) // num_filas + 1
-    carpeta = os.path.join(ruta_carpeta, 'export')
-    os.makedirs(carpeta, exist_ok=True)
-    for i in range(num_archivos):
-        archivo_export = os.path.join(carpeta, f'archivo_{i+1}.csv')
-        df[i*num_filas:(i+1)*num_filas].to_csv(archivo_export, index=False)
+file_num = 1
+for file in files:
+    # Load the data from the CSV file into a DataFrame
+    df = pd.read_csv(os.path.join(carpeta_import, file), sep=';')
+
+    # Apply the convertir_numero function to the specified columns
+    df['Netto-Einkaufspreis (indiv., falls vorh.)'] =\
+     df['Netto-Einkaufspreis (indiv., falls vorh.)'].apply(convertir_numero)
+
+    df['Katalogpreis / empf. VK - VK Brutto Preis ./. Rabatt'] =\
+     df['Katalogpreis / empf. VK - VK Brutto Preis ./. Rabatt'].apply(convertir_numero)
+
+    # Split the 'Gebindemenge / BMEcat Verpackungsmenge' column and keep only the first part
+    df['Gebindemenge / BMEcat Verpackungsmenge'] =\
+     df['Gebindemenge / BMEcat Verpackungsmenge'].astype(str).str.split(',').str[0]
+
+    # Set the 'Preisdatum EK / Konditionsdatum' column to today's date
+    today = date.today()
+    formatted_date = today.strftime('%d/%m/%Y')
+    df['Preisdatum EK / Konditionsdatum'] = formatted_date
+
+    # Split the DataFrame into parts of 15000 rows each
+    result_parts = [df[i:i+MaxRows] for i in range(0, len(df), MaxRows)]
+
+    for part in result_parts:
+        export_file = os.path.join(carpeta_export, f'resultado_{file_num}.csv')
+
+        # Write the part to a new CSV file
+        part.to_csv(export_file, index=False)
+
+        file_num += 1
