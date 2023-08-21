@@ -49,7 +49,7 @@ for file in files:
 
     # Set the 'Preisdatum EK / Konditionsdatum' column to today's date
     today = date.today()
-    formatted_date = today.strftime('%d/%m/%Y')
+    formatted_date = today.strftime('%d.%m.%Y')
     df['Preisdatum EK / Konditionsdatum'] = formatted_date
 
     # Split the DataFrame into parts of 15000 rows each
@@ -59,6 +59,6 @@ for file in files:
         export_file = os.path.join(carpeta_export, f'resultado_{file_num}.csv')
 
         # Write the part to a new CSV file
-        part.to_csv(export_file, index=False)
+        part.to_csv(export_file, index=False, sep= ';')
 
         file_num += 1
