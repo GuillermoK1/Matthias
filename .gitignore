@@ -1,5 +1,1 @@
-I did my research and attempted to creat an executable file by writing a prompt in the command line:
-pip install pyinstaller
-pyinstaller --onefile -w script.py
-The idea is having a more easy way for the client to run the program instead of having them to open the terminal and that stuff.
-The file.exe should have an icon that shows very intuitivly what it does and just double clicking it would produce the results.
+
