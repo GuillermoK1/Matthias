@@ -9,7 +9,7 @@ Un cliente quiere una carpeta en la que pueda:
 >El cliente necesita conservar todos los archivos (el archivo sin modificacion y los archivos modificados).
 >Todos tienen que estar en el mismo formato (CSV).
 >Un archivo modificado sólo puede tener 15000 filas máximo (si hay mas filas para modificar, dividirlo).
->
+
 >[!NOTE]
 >Ejemplo division: `Total rows: 42000 - 1. Archivo 15000 - 2. Archivo 15000 - 3. Archivo 12000`
 
